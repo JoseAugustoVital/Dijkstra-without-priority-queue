@@ -19,7 +19,7 @@ void readGraphFromFile()
     FILE *file = fopen("grafo.txt", "r");
     if (file == NULL)
     {
-        printf("Erro ao realizar a leitura do arquivo 'grafi.txt'. \n");
+        printf("Erro ao realizar a leitura do arquivo 'grafo.txt'. \n");
         exit(1);
     }
 
