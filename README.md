@@ -8,7 +8,7 @@
 
 <div align="center">
 
-![Grafo de Exemplo](https://wiki.inf.ufpr.br/computacao/lib/exe/fetch.php?cache=&w=800&h=400&tok=c55d6e&media=e:dijkstra.jpg)
+![Grafo de Exemplo](https://miro.medium.com/v2/resize:fit:800/1*LuSj3CYWAs8aDdMS5m_wsQ.jpeg)
 
 </div>
 
