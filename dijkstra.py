@@ -38,7 +38,7 @@ def dijkstra(Grafo, inicio):
         # Marca como visitado
         visitado[u] = True
         
-        # Atualiza as distâncias dos vértices adjacentes
+        # Atualiza as distâncias dos vértices adjacentes (u,v) u: origem, v: destino
         for v, custo in Grafo.adj_list[u]:
             # Se não foi visitado e o Distancia[v] + c(v,u) < Distancia[u] 
             if not visitado[v] and dist[u] + custo < dist[v]:
