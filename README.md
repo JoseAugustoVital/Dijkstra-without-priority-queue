@@ -1,6 +1,16 @@
-Aqui está o README.md completo em Markdown:
+<div align="center">
 
-# Implementação do Algoritmo de Dijkstra Modificado
+<h1 style="font-size: 32px">Implementação do Algoritmo de Dijkstra Modificado</h1>
+
+<p style="font-size: 18px">Descrição do projeto...</p>
+
+</div>
+
+<div align="center">
+
+![Grafo de Exemplo](https://wiki.inf.ufpr.br/computacao/lib/exe/fetch.php?cache=&w=800&h=400&tok=c55d6e&media=e:dijkstra.jpg)
+
+</div>
 
 Este projeto consiste na implementação de uma variação do algoritmo de Dijkstra para encontrar o caminho de menor custo em um grafo ponderado.
 
