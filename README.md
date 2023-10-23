@@ -1,58 +1,73 @@
-# Projeto: Implementação do Algoritmo de Dijkstra sem Fila de Prioridade
+Aqui está o README.md completo em Markdown:
 
-Este projeto consiste na implementação do algoritmo de Dijkstra sem o uso de fila de prioridade. Em vez disso, utilizamos um vetor de distância e selecionamos o vértice não visitado de menor valor no vetor por meio de uma busca linear.
+# Implementação do Algoritmo de Dijkstra Modificado
 
-## Objetivo
+Este projeto consiste na implementação de uma variação do algoritmo de Dijkstra para encontrar o caminho de menor custo em um grafo ponderado.
 
-O objetivo deste trabalho é alterar o problema do menor caminho para produzir o caminho de menor custo. No caso de empate entre vários caminhos, optamos pelo de menor comprimento. Se ainda persistir o empate, optamos pelo lexicograficamente anterior.
+## Descrição do Problema
 
-## Modificações no Algoritmo
+O objetivo é modificar o algoritmo de Dijkstra padrão para que ele retorne o caminho de menor custo entre dois vértices. Em caso de empate entre caminhos, deve-se priorizar:
 
-Para atingir o objetivo, armazenamos o comprimento do caminho encontrado para cada vértice (Comprimento[v]) e fazemos duas modificações:
+1. Caminho de menor comprimento
+2. Caminho lexicograficamente menor
 
-1. No momento de selecionar o vértice v a ser fixado (e removido da lista dos pendentes), escolhemos o vértice de menor valor de Distancia. Em caso de empate, optamos pelo com menor Comprimento. Se o empate persistir, escolhemos o de menor número.
+## Solução Implementada
 
-2. No momento de atualizar os vetores Distancia e Anterior, consideramos o caso em que Distancia[v] + c(v,u) = Distancia[u]. Neste caso, trocamos o antecessor de u para v se Comprimento[v]+1 < Comprimento[v] ou Comprimento[v]+1 = Comprimento[v] e v for menor (numericamente) ao atual antecessor de u.
+Para resolver esse problema, foi feita uma implementação do algoritmo de Dijkstra com as seguintes modificações:
 
-## Implementação
+- Armazenamento do comprimento do caminho para cada vértice (vetor `Comprimento[]`) 
+- Ao escolher próximo vértice, usar distância como critério principal, comprimento como critério de desempate e número do vértice como último critério
+- Ao atualizar distâncias, verificar se deve trocar antecessor com base em distância, comprimento e número do vértice
 
-A implementação usa uma lista de adjacência para operar com grafos esparsos (muitos vértices e proporcionalmente poucas arestas).
+Dessa forma, garante-se que o caminho retornado é de menor custo, desempatando primeiro por comprimento e depois lexicograficamente.
 
-## Execução
+## Detalhes da Implementação
 
-O programa processa a linha de comando, executa o que se pede, imprime a saída esperada e termina.
+A implementação utiliza:
 
-A linha de comando será como:
+- Lista de adjacência para representar o grafo 
+- Vetor de distâncias ao invés de fila de prioridade
+- Busca linear no vetor para escolher próximo vértice
 
-```bash
-./menorcaminho grafo.txt s
+## Compilação e Execução
 
-O programa lê o grafo do arquivo grafo.txt e executa o algoritmo de Dijkstra com origem em s até todos os destinos.
-Saída
+O programa deve ser compilado com:
 
-Para todos os vértices (incluindo o próprio s) em ordem numérica, imprime na saída uma linha contendo:
+```
+g++ dijkstra.cpp -o dijkstra
+```
 
-    Caso exista um caminho de s até t:
+E executado assim:
 
-    P t v c v1 v2 ... vn
+```
+./dijkstra grafo.txt origem
+```
 
-    Caso não exista caminho de s a t:
+Onde `grafo.txt` contém a descrição do grafo e `origem` é o vértice de partida.
 
-    U t
+## Formato de Entrada
 
-    Caso ocorra algum problema para leitura do grafo ou execução do algoritmo:
+O arquivo de entrada deve conter o grafo no seguinte formato:
 
-    E
-
-Formato do Grafo
-
-O grafo segue o seguinte formato:
-
+```
 I n m
 N i g- g+
 E i j c
 T
+```
 
-Observações
+Onde:
+- `n` = número de vértices
+- `m` = número de arestas
+- `N` = linha por vértice com grau de entrada e saída
+- `E` = arestas com vértice origem, destino e custo
+- `T` = fim do arquivo
 
-O grafo não terá mais de 10⁶ vértices nem mais de 10⁷ arestas. O trabalho é individual e deve ser inteiramente codificado pelo aluno sem auxílio de nenhuma ferramenta de geração de código.
+## Limitações
+
+- Máximo de 1.000.000 vértices
+- Máximo de 10.000.000 arestas
+
+## Licença
+
+Este projeto é licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
