@@ -8,8 +8,6 @@
 
 <div align="center">
 
-![Grafo de Exemplo](https://miro.medium.com/v2/resize:fit:800/1*LuSj3CYWAs8aDdMS5m_wsQ.jpeg)
-
 </div>
 
 Este projeto consiste na implementação de uma variação do algoritmo de Dijkstra para encontrar o caminho de menor custo em um grafo ponderado.
