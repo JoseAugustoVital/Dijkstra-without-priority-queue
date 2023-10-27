@@ -1,5 +1,7 @@
+# Autor: José Augusto Lajo Vieira Vital
+# Algoritmo de Dijkstra sem fila de prioridade utilizando lista de adjacencia
+
 # Importando as bibliotecas necessárias
-import array
 import sys
 
 # Definindo uma constante para representar infinito
@@ -16,6 +18,7 @@ class Grafo:
         self.comprimento = [0] * num_vertices
         # Vetor para armazenar o caminho mais curto para cada vértice
         self.caminho = [[] for _ in range(num_vertices)]
+        # Vetor para armazenar o elemento anterior para cada vértice
         self.anterior = [[] for _ in range(num_vertices)]
 
     # Método para adicionar uma aresta ao grafo
@@ -27,24 +30,18 @@ class Grafo:
 def dijkstra(Grafo, inicio):
     # Inicializa a distância de todos os vértices como infinito
     dist = [inf] * Grafo.num_vertices
-
     # Marca todos os vértices como não visitados  
     visitado = [False] * Grafo.num_vertices
-
     # A distância do vértice inicial para ele mesmo é zero
     dist[inicio] = 0
-
     # Encontra o caminho mais curto para todos os vértices
     for _ in range(Grafo.num_vertices):
         # Escolhe o vértice com a menor distância, que ainda não foi visitado.
         u = min((i for i in range(Grafo.num_vertices) if not visitado[i]), key=lambda i: (dist[i], Grafo.comprimento[i],i))
-
         # Marca o vértice escolhido como visitado
         visitado[u] = True
-        # print(u)
         # Atualiza a distância dos vértices adjacentes ao vértice escolhido
         for v, custo in Grafo.lista_adj[u]:
-            # print(u,v)
             # Se o vértice adjacente não foi visitado e a distância é menor através do vértice u 
             if not visitado[v] and dist[u] + custo < dist[v]:
                 # Atualiza a distância e o comprimento do caminho mais curto
@@ -52,18 +49,17 @@ def dijkstra(Grafo, inicio):
                 Grafo.comprimento[v] = Grafo.comprimento[u] + 1
                 # Atualiza o caminho mais curto para v através de u
                 Grafo.caminho[v] = Grafo.caminho[u] + [u]
-                # print(Grafo.caminho[u],u)
                 Grafo.anterior[v] = u
-                # print(Grafo.anterior[v])
-                # print(u,v)
-            # Em caso de empate na distância, escolhe o caminho com menor comprimento ou menor rótulo. #TODO
+            # Em caso de empate na distância, escolhe o caminho com menor comprimento ou menor rótulo. 
             elif not visitado[v] and dist[u] + custo == dist[v]:
-                # print(u,v)
+                # Se o comprimento não for igual ou se o comprimento for igual e o rótulo do vértice u é menor do que o vértice anteirior de v
                 if Grafo.comprimento[u]+1 < Grafo.comprimento[v] or (Grafo.comprimento[u]+1 == Grafo.comprimento[v] and u < Grafo.anterior[v]):
+                    # Atualiza o comprimento de v
                     Grafo.comprimento[v] = Grafo.comprimento[u] + 1
+                    # Atualiza o caminho de v
                     Grafo.caminho[v] = Grafo.caminho[u] + [u]
+                    # Atribui o u ao anterior de v
                     Grafo.anterior[v] = u
-
     return dist
 
 # Função para ler o grafo de um arquivo de texto
@@ -84,13 +80,14 @@ def read(arquivo):
 
 # Função principal que lê o grafo, executa o algoritmo de Dijkstra e imprime os resultados.
 def main():
+    # Argumentos de leitura
     arquivo = sys.argv[1]
     inicio = int(sys.argv[2])
-    
+    # Leitura do arquivo 
     g = read(arquivo)
-    
+    # Chamada da funcao Dijkstra
     dist = dijkstra(g, inicio)
-    
+    # Iterando sobre todos os vértices de g
     for i in range(g.num_vertices):
         if dist[i] == inf:
             print('U', i)
@@ -99,6 +96,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# Para executar o código, use o seguinte comando no terminal:
-# python3.11 dijkstra.py ../Dijkstra-without-priority-queue/inputs/g-10-30.txt 4 > generated-output.txt
