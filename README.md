@@ -1,81 +1,55 @@
-<div align="center">
+# Teoria dos Grafos e seus Algoritmos
 
-<h1 style="font-size: 32px">Implementação do Algoritmo de Dijkstra Modificado</h1>
+## Informações do Estudante
 
-<p style="font-size: 18px">Descrição do projeto...</p>
+- **Nome**: José Augusto Lajo Vieira Vital
+- **Universidade**: Universidade Federal do Mato Grosso do Sul (FACOM - Faculdade de Computação)
+- **Matéria**: Teoria dos Grafos e seus Algoritmos
+- **Professor**: Vagner Pedrotti
 
-</div>
+## Algoritmo de Dijkstra sem fila de prioridade
 
-<div align="center">
+Este projeto implementa o algoritmo de Dijkstra sem fila de prioridade. O algoritmo usa um vetor de distância e escolhe o vértice não visitado de menor valor no vetor por uma busca linear.
 
-</div>
+### Como executar
 
-Este projeto consiste na implementação de uma variação do algoritmo de Dijkstra para encontrar o caminho de menor custo em um grafo ponderado.
+Para executar o programa, você precisa ter Python instalado em seu computador. Você pode baixar Python aqui.
 
-## Descrição do Problema
+Depois de instalar Python, você pode executar o programa com o seguinte comando:
 
-O objetivo é modificar o algoritmo de Dijkstra padrão para que ele retorne o caminho de menor custo entre dois vértices. Em caso de empate entre caminhos, deve-se priorizar:
-
-1. Caminho de menor comprimento
-2. Caminho lexicograficamente menor
-
-## Solução Implementada
-
-Para resolver esse problema, foi feita uma implementação do algoritmo de Dijkstra com as seguintes modificações:
-
-- Armazenamento do comprimento do caminho para cada vértice (vetor `Comprimento[]`) 
-- Ao escolher próximo vértice, usar distância como critério principal, comprimento como critério de desempate e número do vértice como último critério
-- Ao atualizar distâncias, verificar se deve trocar antecessor com base em distância, comprimento e número do vértice
-
-Dessa forma, garante-se que o caminho retornado é de menor custo, desempatando primeiro por comprimento e depois lexicograficamente.
-
-## Detalhes da Implementação
-
-A implementação utiliza:
-
-- Lista de adjacência para representar o grafo 
-- Vetor de distâncias ao invés de fila de prioridade
-- Busca linear no vetor para escolher próximo vértice
-
-## Compilação e Execução
-
-O programa deve ser compilado com:
-
-```
-g++ dijkstra.cpp -o dijkstra
+```bash
+python menorcaminho.py grafo.txt s
 ```
 
-E executado assim:
-
+Caso o terminal retornar que o comando não foi identificado, tente colocar a versão do python instalada.
+ex.: 
+```bash
+python3.11 menorcaminho.py grafo.txt s
 ```
-./dijkstra grafo.txt origem
-```
 
-Onde `grafo.txt` contém a descrição do grafo e `origem` é o vértice de partida.
+Onde `grafo.txt` é o arquivo que contém a descrição do grafo e `s` é o vértice de origem.
 
-## Formato de Entrada
+## Formato do arquivo do grafo
 
-O arquivo de entrada deve conter o grafo no seguinte formato:
+O arquivo do grafo deve seguir o seguinte formato:
 
-```
-I n m
-N i g- g+
-E i j c
-T
-```
+I n m  
+N i g- g+  
+E i j c T
+
 
 Onde:
-- `n` = número de vértices
-- `m` = número de arestas
-- `N` = linha por vértice com grau de entrada e saída
-- `E` = arestas com vértice origem, destino e custo
-- `T` = fim do arquivo
 
-## Limitações
+- `I n m`: Informações gerais do grafo, número de vértices e número de arestas.
+- `N i g- g+`: Uma linha para cada vértice contendo o número do vértice de 0 a n-1 com o grau de entrada e o grau de saída.
+- `E i j c`: Uma linha para cada arco do grafo, com o vértice de origem, vértice de destino e custo. O custo será sempre um inteiro não-negativo.
+- `T`: Indica o fim do arquivo.
 
-- Máximo de 1.000.000 vértices
-- Máximo de 10.000.000 arestas
+## Saída
 
-## Licença
+Para todos os vértices (incluindo o próprio `s`) em ordem numérica, o programa imprime na saída uma linha contendo:
 
-Este projeto é licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
+- Caso exista um caminho de `s` até `t`: `P t v c v1 v2 ... vn`
+- Caso não exista caminho de `s` a `t`: `U t`
+- Caso ocorra algum problema para leitura do grafo ou execução do algoritmo: `E`
+
